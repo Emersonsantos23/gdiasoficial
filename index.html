@@ -1,282 +1,381 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblioteca GDias</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Biblioteca GDias — Unidade Plena</title>
+  <meta name="description" content="Biblioteca GDias — suporte, agenda, documentação e recursos para a comunidade">
+  <meta name="theme-color" content="#1e1e2f">
+
+  <!-- Fonts (preconnect para performance) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
     :root{
-        --primary: #1e1e2f;
-        --secondary: #4b2a99;
-        --highlight: #ffcc00;
-        --text-light: #ffffff;
-        --bg-light: #2a2a3d;
-        --shadow: 0 10px 30px rgba(0,0,0,0.5);
-        --font-title: 'Montserrat', sans-serif;
-        --font-body: 'Poppins', sans-serif;
+      --primary: #1e1e2f;
+      --secondary: #4b2a99;
+      --highlight: #ffcc00;
+      --text-light: #ffffff;
+      --bg-light: #2a2a3d;
+      --muted: #bfc3d6;
+      --glass: rgba(255,255,255,0.04);
+
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 8px 30px rgba(0,0,0,0.5);
+
+      --fw-title: 700;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family: var(--font-body); background: var(--primary); color:#fff; scroll-behavior: smooth;}
-    a{text-decoration:none;color:inherit;}
+    /* Reset & base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Poppins',system-ui,Arial;
+      background: linear-gradient(180deg,var(--primary), #151526 120%);
+      color:var(--text-light);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+
+    /* Container */
+    .container{width:94%;max-width:1200px;margin:0 auto}
 
     /* Header */
     header{
-        position: fixed;
-        top:0; left:0;
-        width:100%;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:15px 5%;
-        background: rgba(30,30,47,0.95);
-        backdrop-filter: blur(10px);
-        z-index:1000;
-        box-shadow: var(--shadow);
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        transition: 0.3s;
+      position:fixed;left:0;right:0;top:12px;margin:0 auto;z-index:1000;padding:12px 0;backdrop-filter: blur(6px);
     }
-    header img{height:55px;}
+    .nav-wrap{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+      border-radius:14px;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-soft)
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:52px;width:auto;border-radius:8px}
+    .brand h1{font-family:'Montserrat',sans-serif;font-size:1.05rem;margin:0;color:var(--highlight)}
 
-    nav ul{
-        display:flex; gap:25px; list-style:none;
-    }
-    nav ul li a{
-        padding:8px 15px;
-        border-radius:30px;
-        font-weight:600;
-        transition:0.3s;
-        color:#fff;
-    }
-    nav ul li a:hover{
-        background: var(--highlight);
-        color: var(--primary);
-    }
-    nav ul li a.entrar{
-        background: var(--highlight);
-        color: var(--primary);
-        font-weight:700;
-    }
-    nav ul li a.entrar:hover{
-        background: #fff;
-        color: var(--primary);
-    }
+    nav ul{display:flex;gap:18px;align-items:center;list-style:none}
+    nav a{padding:8px 14px;border-radius:999px;font-weight:600;color:var(--muted);transition:all .18s}
+    nav a:hover{background:var(--highlight);color:var(--primary)}
+    nav a.cta{background:var(--highlight);color:var(--primary)}
 
-    /* Carrossel centralizado */
-   #carousel {
-    margin: 120px auto 50px auto;
-    width: 90%;
-    max-width: 1200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
-}
+    /* Mobile */
+    .mobile-btn{display:none;border:0;background:transparent;color:var(--text-light);font-size:1.2rem}
 
-.carousel-slide {
-    display: flex;
-    transition: transform 0.7s ease-in-out;
-}
+    /* Hero */
+    .hero{padding-top:130px;padding-bottom:40px}
+    .hero-grid{display:grid;grid-template-columns:1fr 480px;gap:32px;align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:var(--radius-lg);box-shadow:var(--shadow-soft)}
+    .hero h2{font-family:'Montserrat',sans-serif;font-size:2rem;margin-bottom:12px}
+    .hero p{color:var(--muted);margin-bottom:18px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{display:inline-block;padding:10px 16px;border-radius:12px;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--highlight);color:var(--primary)}
+    .btn-outline{border:1px solid rgba(255,255,255,0.08);color:var(--muted);background:transparent}
 
-.carousel-slide img {
-    width: 100%;
-    height: auto; /* Mantém proporção */
-    object-fit: contain; /* Evita cortar a imagem */
-    border-radius: 25px;
-    transition: transform 0.5s, box-shadow 0.5s;
-}
+    /* Carousel */
+    .carousel{
+      position:relative;overflow:hidden;border-radius:20px;
+      box-shadow:0 30px 60px rgba(0,0,0,0.6);
+    }
+    .carousel-track{display:flex;transition:transform .6s ease-in-out}
+    .carousel-slide{min-width:100%;padding:28px;display:flex;align-items:center;justify-content:center}
+    .carousel-slide img{border-radius:14px;max-height:420px;object-fit:cover}
 
-.carousel-slide img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 50px var(--highlight);
-}
+    .carousel-controls{position:absolute;left:12px;right:12px;top:0;bottom:0;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+    .control-btn{pointer-events:auto;background:rgba(0,0,0,0.5);border:0;color:#fff;padding:12px;border-radius:50%;cursor:pointer;font-size:18px}
+    .indicators{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px}
+    .indicator{width:10px;height:10px;border-radius:10px;opacity:.6;background:rgba(255,255,255,0.18);cursor:pointer}
+    .indicator.active{background:var(--highlight);opacity:1}
 
-    .carousel-btn{
-        position:absolute;
-        top:50%;
-        transform:translateY(-50%);
-        background: rgba(0,0,0,0.6);
-        color:#fff;
-        border:none;
-        font-size:2em;
-        padding:10px 15px;
-        cursor:pointer;
-        border-radius:50%;
-        transition:0.3s;
-        z-index:10;
-    }
-    .carousel-btn:hover{background: var(--highlight); color:var(--primary);}
-    .prev{left:20px;}
-    .next{right:20px;}
-
-    /* Serviços */
-    #services{
-        background: var(--bg-light);
-        padding:80px 5%;
-        text-align:center;
-        border-radius:20px 20px 0 0;
-    }
-    .services-grid{
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:40px;
-    }
-    .service-item{
-        background: #1f1f34;
-        width:180px;
-        border-radius:15px;
-        box-shadow: 0 0 20px rgba(255,204,0,0.3);
-        transition: 0.3s;
-        padding:20px;
-        cursor:pointer;
-    }
-    .service-item img{
-        width:90px;
-        height:90px;
-        margin-bottom:15px;
-        transition: 0.3s;
-    }
-    .service-item h3{
-        font-family: var(--font-title);
-        font-size:1.1em;
-        color: var(--highlight);
-    }
-    .service-item:hover{
-        transform: translateY(-10px) scale(1.05);
-        box-shadow:0 0 40px var(--highlight);
-    }
+    /* Services */
+    #services{margin-top:34px;padding:48px;border-radius:20px;background:linear-gradient(180deg,#151526, #12121b)}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px}
+    .service{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));padding:18px;border-radius:16px;text-align:center;transition:transform .25s,box-shadow .25s}
+    .service img{width:72px;height:72px;margin:0 auto 10px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5))}
+    .service h3{font-family:'Montserrat',sans-serif;color:var(--highlight);margin-bottom:6px}
+    .service p{font-size:.92rem;color:var(--muted)}
+    .service:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
 
     /* Footer */
-    footer{
-        background: #121223;
-        color:#fff;
-        text-align:center;
-        padding:60px 5%;
-    }
-    footer img{height:55px; margin-bottom:20px;}
-    footer ul{
-        display:flex;
-        justify-content:center;
-        gap:20px;
-        list-style:none;
-        margin-bottom:20px;
-    }
-    footer ul li img{
-        width:40px; height:40px;
-        border-radius:50%;
-        padding:8px;
-        background: rgba(255,255,255,0.1);
-        transition:0.3s;
-    }
-    footer ul li img:hover{
-        transform:scale(1.2);
-        background: var(--highlight);
+    footer{margin-top:36px;padding:40px;border-radius:18px;background:#0f1020;text-align:center;color:var(--muted)}
+    .socials{display:flex;gap:12px;justify-content:center;margin:18px 0}
+    .socials a{display:inline-flex;padding:8px;border-radius:10px;background:rgba(255,255,255,0.03)}
+
+    /* Utilities */
+    .small{font-size:.9rem;color:var(--muted)}
+    .muted{color:var(--muted)}
+
+    /* Back to top */
+    #toTop{position:fixed;right:18px;bottom:18px;padding:10px;border-radius:10px;border:0;background:linear-gradient(180deg,var(--highlight),#f0b600);color:var(--primary);cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,0.4);display:none}
+
+    /* Dark mode variant - optional (kept for expandability) */
+    .dark-mode{--primary:#0b0b12;--bg-light:#111;--text-light:#e9e9f2}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr;}
+      .hero h2{font-size:1.6rem}
+      nav ul{display:none}
+      .mobile-btn{display:inline-block}
+      header .nav-wrap{padding:10px}
     }
 
-    /* Responsivo */
-    @media(max-width:768px){
-        nav ul{flex-direction:column; background:rgba(30,30,47,0.95); position:absolute; top:70px; right:5%; padding:15px; border-radius:10px; display:none;}
-        nav.active ul{display:flex;}
-        #btn-mobile{display:block; background:none; border:none; cursor:pointer; width:30px; height:30px; position:relative;}
-        #btn-mobile span, #btn-mobile span::before, #btn-mobile span::after{
-            display:block; height:3px; width:100%; background:#fff; border-radius:3px; position:absolute;
-        }
-        #btn-mobile span::before{content:''; top:-10px;}
-        #btn-mobile span::after{content:''; top:10px;}
+    @media (max-width:560px){
+      .carousel-slide img{max-height:260px}
     }
-</style>
+  </style>
 </head>
 <body>
 
-<header>
-    <a href="#"><img src="novalogo.png" alt="Logo"></a>
-    <nav id="nav">
-        <button id="btn-mobile"><span></span></button>
-        <ul>
-            <li><a href="#" class="entrar">Entrar</a></li>
-            <li><a href="#">Projetos</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Contato</a></li>
+  <header>
+    <div class="container nav-wrap" role="navigation" aria-label="Navegação principal">
+      <div class="brand">
+        <img src="novalogo.png" alt="Logo Biblioteca GDias" onerror="this.style.opacity=0.85">
+        <div>
+          <h1>Biblioteca GDias</h1>
+          <div class="small muted">Unidade Plena — São Luís Gonçalves Dias</div>
+        </div>
+      </div>
+
+      <nav aria-label="Menu principal">
+        <button class="mobile-btn" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+        <ul id="menuList">
+          <li><a href="#entrar" class="cta">Entrar</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
         </ul>
-    </nav>
-</header>
+      </nav>
 
-<main>
-    <!-- Carrossel -->
-    <div id="carousel">
-        <button class="carousel-btn prev">&#10094;</button>
-        <div class="carousel-slide">
-            <img src="01.jpg" alt="Imagem 1">
-            <img src="02.jpg" alt="Imagem 2">
-            <img src="03.jpg" alt="Imagem 3">
-        </div>
-        <button class="carousel-btn next">&#10095;</button>
     </div>
+  </header>
 
-    <!-- Serviços -->
-    <section id="services">
-        <h2 style="font-family:var(--font-title); margin-bottom:50px;">Serviços</h2>
-        <div class="services-grid">
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/ffcc00/technical-support.png" alt="Suporte">
-                <h3>Suporte</h3>
-            </div>
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/ffcc00/idea.png" alt="Ideias">
-                <h3>Ideias</h3>
-            </div>
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/ffcc00/calendar.png" alt="Calendário">
-                <h3>Calendário</h3>
-            </div>
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/ffcc00/clock.png" alt="Horários">
-                <h3>Horários</h3>
-            </div>
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/ffcc00/document.png" alt="Documentação">
-                <h3>Documentação</h3>
-            </div>
+  <main class="container">
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <h2>Bem-vindo à Biblioteca GDias</h2>
+          <p>Recursos, suporte e agenda para ajudar sua comunidade a crescer. Acesse ideias, documentação e horários em um só lugar.</p>
+
+          <div class="cta-row">
+            <a href="#services" class="btn btn-primary">Ver serviços</a>
+            <a href="#contato" class="btn btn-outline">Fale conosco</a>
+          </div>
+
+          <div style="margin-top:18px" class="small muted">Telefone/WhatsApp: <strong>+55 (00) 0 0000-0000</strong> • Email: <strong>contato@edwsa.com.br</strong></div>
         </div>
+
+        <!-- Carousel column -->
+        <div>
+          <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <picture>
+                  <source srcset="01.jpg" media="(min-width:600px)">
+                  <img src="01-mobile.jpg" alt="Evento comunitário" loading="lazy">
+                </picture>
+              </div>
+              <div class="carousel-slide">
+                <picture>
+                  <source srcset="02.jpg" media="(min-width:600px)">
+                  <img src="02-mobile.jpg" alt="Sessão de leitura" loading="lazy">
+                </picture>
+              </div>
+              <div class="carousel-slide">
+                <picture>
+                  <source srcset="03.jpg" media="(min-width:600px)">
+                  <img src="03-mobile.jpg" alt="Ações da comunidade" loading="lazy">
+                </picture>
+              </div>
+            </div>
+
+            <div class="carousel-controls">
+              <button class="control-btn" id="prev" aria-label="Anterior">‹</button>
+              <button class="control-btn" id="next" aria-label="Próximo">›</button>
+            </div>
+
+            <div class="indicators" id="indicators" aria-hidden="false"></div>
+
+          </div>
+        </div>
+      </div>
     </section>
-</main>
 
-<footer>
-    <img src="novalogo.png" alt="Logo">
-    <ul>
-        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></li>
-        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></li>
-        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp"></li>
-        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email"></li>
-    </ul>
-    <p>&copy; UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2025. EDWSA.COM.BR <BR></BR>Todos os direitos reservados.</p>
-</footer>
+    <!-- Services -->
+    <section id="services">
+      <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:16px">Serviços</h2>
+      <p class="small muted">Clique em um serviço para saber mais — todos projetados para apoiar projetos e agentes da unidade.</p>
 
-<script>
-    const btnMobile = document.getElementById('btn-mobile');
-    const nav = document.getElementById('nav');
-    btnMobile.addEventListener('click', ()=>nav.classList.toggle('active'));
+      <div class="services-grid" style="margin-top:18px">
+        <article class="service" tabindex="0" role="article" aria-label="Suporte">
+          <img src="https://img.icons8.com/ios-filled/100/ffcc00/technical-support.png" alt="Ícone suporte">
+          <h3>Suporte</h3>
+          <p>Ajuda técnica e logística para eventos, transmissão e infraestrutura.</p>
+        </article>
 
-    const slide = document.querySelector('.carousel-slide');
-    const slides = document.querySelectorAll('.carousel-slide img');
-    let index = 0;
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
+        <article class="service" tabindex="0" role="article" aria-label="Ideias">
+          <img src="https://img.icons8.com/ios-filled/100/ffcc00/idea.png" alt="Ícone ideias">
+          <h3>Ideias</h3>
+          <p>Banco de iniciativas, sugestões de projetos e templates prontos.</p>
+        </article>
 
-    function showSlide(i){
-        if(i<0) index=slides.length-1;
-        else if(i>=slides.length) index=0;
-        else index=i;
-        slide.style.transform = `translateX(-${index*100}%)`;
+        <article class="service" tabindex="0" role="article" aria-label="Calendário">
+          <img src="https://img.icons8.com/ios-filled/100/ffcc00/calendar.png" alt="Ícone calendário">
+          <h3>Calendário</h3>
+          <p>Agenda de eventos, reuniões e compromissos da comunidade.</p>
+        </article>
+
+        <article class="service" tabindex="0" role="article" aria-label="Horários">
+          <img src="https://img.icons8.com/ios-filled/100/ffcc00/clock.png" alt="Ícone horários">
+          <h3>Horários</h3>
+          <p>Quadro de horários das atividades semanais e salas disponíveis.</p>
+        </article>
+
+        <article class="service" tabindex="0" role="article" aria-label="Documentação">
+          <img src="https://img.icons8.com/ios-filled/100/ffcc00/document.png" alt="Ícone documentos">
+          <h3>Documentação</h3>
+          <p>Formulários, termos, manuais e modelos para download.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Additional content placeholder -->
+    <section id="projetos" style="margin-top:28px">
+      <div class="hero-card">
+        <h3 style="font-family:'Montserrat',sans-serif">Projetos em destaque</h3>
+        <p class="muted small">Aqui você pode listar projetos com links para páginas internas ou PDFs. Se quiser, eu gero uma lista automática com cards.</p>
+      </div>
+    </section>
+
+    <section id="sobre" style="margin-top:18px">
+      <div class="hero-card">
+        <h3 style="font-family:'Montserrat',sans-serif">Sobre</h3>
+        <p class="muted small">Unidade Plena — São Luís Gonçalves Dias. Trabalho voluntário, eventos e apoio às equipes locais.</p>
+      </div>
+    </section>
+
+    <section id="contato" style="margin-top:18px;margin-bottom:18px">
+      <div class="hero-card">
+        <h3 style="font-family:'Montserrat',sans-serif">Contato</h3>
+        <p class="muted small">Email: contato@edwsa.com.br • Telefone/WhatsApp: +55 (00) 0 0000-0000</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <img src="novalogo.png" alt="Logo" style="height:55px;margin:0 auto;display:block;">
+      <div class="socials" role="navigation" aria-label="Redes sociais">
+        <a href="#" aria-label="Facebook" title="Facebook"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" width="26"></a>
+        <a href="#" aria-label="Instagram" title="Instagram"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" width="26"></a>
+        <a href="#" aria-label="WhatsApp" title="WhatsApp"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" width="26"></a>
+        <a href="mailto:contato@edwsa.com.br" aria-label="Email" title="Email"><img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email" width="26"></a>
+      </div>
+
+      <p class="small muted">&copy; UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2025. EDWSA.COM.BR — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="Voltar ao topo">↑</button>
+
+  <script>
+    /* ===== Mobile menu toggle ===== */
+    const mobileToggle = document.getElementById('mobileToggle');
+    const menuList = document.getElementById('menuList');
+    mobileToggle.addEventListener('click', ()=>{
+      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', String(!expanded));
+      menuList.style.display = menuList.style.display === 'flex' ? 'none' : 'flex';
+      menuList.style.flexDirection = 'column';
+      menuList.style.background = 'rgba(20,20,34,0.9)';
+      menuList.style.padding = '12px';
+      menuList.style.borderRadius = '10px';
+      menuList.style.position = 'absolute';
+      menuList.style.right = '18px';
+      menuList.style.top = '70px';
+      menuList.style.zIndex = 1200;
+    });
+
+    /* ===== Back to top ===== */
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 400) toTop.style.display = 'block';
+      else toTop.style.display = 'none';
+    });
+    toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    /* ===== Carousel logic (touch + indicators + auto) ===== */
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const indicatorsWrap = document.getElementById('indicators');
+    let current = 0;
+    let intervalId = null;
+
+    function goTo(index){
+      current = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      updateIndicators();
     }
 
-    nextBtn.addEventListener('click', ()=>showSlide(index+1));
-    prevBtn.addEventListener('click', ()=>showSlide(index-1));
-    setInterval(()=>showSlide(index+1), 5000);
-</script>
+    function createIndicators(){
+      slides.forEach((_,i)=>{
+        const d = document.createElement('div');
+        d.className = 'indicator'+(i===0? ' active':'');
+        d.setAttribute('data-slide', i);
+        d.addEventListener('click', ()=>{ stopAuto(); goTo(i); startAuto(); });
+        indicatorsWrap.appendChild(d);
+      });
+    }
+
+    function updateIndicators(){
+      const dots = indicatorsWrap.querySelectorAll('.indicator');
+      dots.forEach((dot,i)=>dot.classList.toggle('active', i===current));
+    }
+
+    prevBtn.addEventListener('click', ()=>{ stopAuto(); goTo(current-1); startAuto(); });
+    nextBtn.addEventListener('click', ()=>{ stopAuto(); goTo(current+1); startAuto(); });
+
+    // Swipe support
+    let startX = 0;
+    track.addEventListener('touchstart', (e)=> startX = e.changedTouches[0].clientX);
+    track.addEventListener('touchend', (e)=>{
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if(Math.abs(dx) > 40){ stopAuto(); if(dx<0) goTo(current+1); else goTo(current-1); startAuto(); }
+    });
+
+    function startAuto(){ intervalId = setInterval(()=> goTo(current+1), 5000); }
+    function stopAuto(){ if(intervalId) clearInterval(intervalId); }
+
+    createIndicators(); startAuto();
+
+    /* ===== Accessibility enhancements: keyboard navigation ===== */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowLeft') { stopAuto(); goTo(current-1); startAuto(); }
+      if(e.key === 'ArrowRight') { stopAuto(); goTo(current+1); startAuto(); }
+    });
+
+    /* ===== Simple progressive enhancement for images: add loading=lazy to existing imgs (already used) ===== */
+
+    /* ===== Optional: Persist theme preference (left ready) ===== */
+    // const themeToggle = ... (if you want a toggle button)
+
+    /* ===== Small UX: hide mobile menu if window resized bigger ===== */
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth > 980){ menuList.style.display = 'flex'; menuList.style.position = 'static'; }
+    });
+
+  </script>
 
 </body>
 </html>
