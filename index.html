@@ -7,27 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="icon.png">
     <title>Biblioteca GDias</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
-        /* style.css EMBUTIDO */
+        /* CSS APRIMORADO COM FOCO NO CARROSSEL E ÍCONES */
 
-        /* --- Reset e Tipografia Básica --- */
+        /* --- Variáveis e Tipografia --- */
         :root {
-            --primary-color: #007bff;
-            /* Azul primário (pode ajustar) */
-            --secondary-color: #6c757d;
-            /* Cinza secundário */
-            --background-light: #f8f9fa;
-            /* Fundo claro */
-            --text-color: #343a40;
-            /* Cor do texto */
-            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --primary-color: #004d99;
+            /* Azul Escuro Institucional */
+            --secondary-color: #007bff;
+            /* Azul Claro de Destaque */
+            --highlight-color: #ffc107;
+            /* Amarelo de Destaque (Hover/Entrar) */
+            --background-light: #f4f6f8;
+            /* Fundo Claro Suave */
+            --text-color: #212529;
+            /* Preto Quase Padrão */
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            /* Sombra mais suave */
+            --title-font: 'Montserrat', sans-serif;
+            --body-font: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--body-font);
             color: var(--text-color);
             background-color: white;
             margin: 0;
@@ -42,7 +50,8 @@
             align-items: center;
             padding: 10px 5%;
             background-color: white;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            /* Sombra mais fina */
             position: fixed;
             top: 0;
             left: 0;
@@ -52,14 +61,13 @@
 
         #logo-link img {
             height: 60px;
-            /* Ajuste o tamanho do logo */
             width: auto;
         }
 
         #menu {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 25px;
             margin: 0;
             padding: 0;
         }
@@ -67,21 +75,261 @@
         #menu a {
             text-decoration: none;
             color: var(--text-color);
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+            /* Poppins Semi-bold */
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        /* Efeito de sublinhado moderno */
+        #menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
         }
 
         #menu a:hover,
         #menu a.entrar {
-            background-color: var(--primary-color);
-            color: white;
+            color: var(--secondary-color);
         }
 
-        /* --- Menu Mobile (Hamburger) --- */
+        #menu a:hover::after,
+        #menu a.entrar::after {
+            width: 100%;
+            background-color: var(--highlight-color);
+        }
+
+        #menu a.entrar {
+            color: white;
+            background-color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        #menu a.entrar:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #menu a.entrar::after {
+            content: none;
+        }
+
+
+        /* --- Títulos de Seção --- */
+        .section-title {
+            font-family: var(--title-font);
+            margin: 60px 0 20px 0;
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--highlight-color);
+            margin: 5px auto 0;
+            border-radius: 2px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* --- Carousel (Galeria) --- */
+        #gallery-section {
+            padding: 20px 0;
+        }
+
+        .carousel-inner img {
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .carousel-caption h3 {
+            font-family: var(--title-font);
+            font-weight: 700;
+        }
+
+
+        /* --- Seção de Serviços/Ícones --- */
+        #services-section {
+            background-color: var(--background-light); /* Fundo sutil para esta seção */
+            padding: 60px 0 80px 0;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+            padding: 0 15px;
+        }
+
+        .service-item {
+            width: 150px;
+            transition: transform 0.3s, opacity 0.3s;
+            /* Mantendo transição de hover */
+        }
+
+        .service-item a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .service-icon {
+            width: 90px;
+            height: 90px; /* Definindo altura fixa para manter o círculo */
+            padding: 15px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        /* Efeito de destaque no hover */
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-item:hover .service-icon {
+            background-color: var(--secondary-color);
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .service-name {
+            font-family: var(--title-font);
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        #main-footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo img {
+            filter: brightness(1.5);
+            /* Deixa o logo mais claro no fundo escuro */
+            margin-bottom: 10px;
+        }
+
+        .footer-copyright {
+            font-weight: 300;
+            line-height: 1.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover .social-icon {
+            background-color: var(--highlight-color);
+            transform: scale(1.1);
+        }
+
+        /* --- Responsividade (Media Queries) --- */
+        @media (max-width: 768px) {
+
+            /* Menu Mobile */
+            #btn-mobile {
+                display: block;
+            }
+
+            #nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            #menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 5%;
+                background-color: white;
+                padding: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+                z-index: 999;
+                width: 150px;
+                text-align: right;
+            }
+
+            #nav.active #menu {
+                display: flex;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            #menu a {
+                padding: 10px 0;
+                width: 100%;
+            }
+        }
+
+        /* Hambuger Icon (Mantido) */
         #btn-mobile {
-            display: none;
+            /* ... estilos do hamburger ... */
             border: none;
             background: none;
             cursor: pointer;
@@ -129,253 +377,6 @@
         #nav.active #hamburger::after {
             transform: rotate(-90deg) translate(0, 10px);
         }
-
-        /* --- Títulos de Seção --- */
-        .section-title {
-            margin: 40px 0 20px 0;
-            font-size: 2.5em;
-            font-weight: 300;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* --- Carousel (Galeria) --- */
-        #gallery-section {
-            padding: 20px 0;
-        }
-
-        .carousel-inner img {
-            max-height: 450px;
-            /* Limita a altura das imagens no desktop */
-            object-fit: cover;
-        }
-
-        /* --- Seção Sobre (Cards de Informação) --- */
-        #about-section {
-            padding: 40px 0;
-        }
-
-        .info-cards-container {
-            display: flex;
-            justify-content: center;
-            /* Centraliza os cards */
-            gap: 30px;
-            margin-top: 30px;
-            padding: 0 15px;
-        }
-
-        .info-card {
-            background: var(--background-light);
-            border-radius: 10px;
-            box-shadow: var(--card-shadow);
-            padding: 20px;
-            flex: 1;
-            max-width: 45%;
-            transition: transform 0.3s;
-        }
-
-        .info-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header span {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-
-        .card-desc {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        /* --- Seção de Serviços --- */
-        #services-section {
-            background-color: var(--background-light);
-            padding: 40px 0 60px 0;
-            text-align: center;
-        }
-
-        .services-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            /* Permite quebrar linha em telas menores */
-            gap: 30px;
-            margin-top: 30px;
-            padding: 0 15px;
-        }
-
-        .service-item {
-            width: 150px;
-            /* Tamanho fixo para o item de serviço */
-            padding: 15px;
-            transition: transform 0.3s;
-        }
-
-        .service-item:hover {
-            transform: scale(1.05);
-        }
-
-        .service-item a {
-            text-decoration: none;
-            color: var(--text-color);
-            display: block;
-        }
-
-        .service-icon {
-            width: 80px;
-            /* Reduzindo o tamanho dos ícones */
-            height: auto;
-            margin-bottom: 10px;
-            transition: filter 0.3s;
-        }
-
-        .service-item:hover .service-icon {
-            filter: drop-shadow(0 0 5px var(--primary-color));
-        }
-
-        .service-name {
-            margin: 0;
-            font-size: 1.1em;
-        }
-
-        /* --- Footer --- */
-        #main-footer {
-            background-color: var(--text-color);
-            color: white;
-            padding: 30px 5%;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 20px;
-        }
-
-        .footer-copyright {
-            line-height: 1.5;
-        }
-
-        .social-links {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s;
-        }
-
-        .social-links a:hover .social-icon {
-            transform: scale(1.1);
-        }
-
-        /* --- Responsividade (Media Queries) --- */
-        @media (max-width: 992px) {
-            .info-cards-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .info-card {
-                max-width: 80%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            /* Menu Mobile */
-            #btn-mobile {
-                display: block;
-            }
-
-            #nav {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-            }
-
-            #menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                right: 5%;
-                background-color: white;
-                padding: 15px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                border-radius: 5px;
-                z-index: 999;
-                width: 150px;
-                text-align: right;
-            }
-
-            #nav.active #menu {
-                display: flex;
-                animation: slideDown 0.3s ease-out;
-                /* Animação simples ao abrir */
-            }
-
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            #menu a {
-                padding: 10px 0;
-                width: 100%;
-            }
-
-            .info-card {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #main-header {
-                padding: 10px 20px;
-            }
-
-            .section-title {
-                font-size: 2em;
-            }
-
-            .services-grid {
-                gap: 20px;
-            }
-
-            .service-item {
-                width: 40%;
-            }
-        }
     </style>
 </head>
 
@@ -399,7 +400,7 @@
     </header>
 
     <main>
-        <section id="gallery-section" class="container animate__animated animate__fadeIn">
+        <section id="gallery-section" class="container animate__animated animate__fadeInDown">
             <h1 class="section-title text-center">Galeria</h1>
             <br>
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -413,21 +414,21 @@
                     <div class="item active">
                         <img src="01.jpg" alt="Biblioteca GDias - Imagem 1" style="width:100%;">
                         <div class="carousel-caption">
-                            <h3>iema pleno</h3>
+                            <h3>IEMA Pleno</h3>
                             <p>Gonçalves Dias</p>
                         </div>
                     </div>
                     <div class="item">
                         <img src="02.jpg" alt="Biblioteca GDias - Imagem 2" style="width:100%;">
                         <div class="carousel-caption">
-                            <h3>iema pleno</h3>
+                            <h3>IEMA Pleno</h3>
                             <p>Gonçalves Dias</p>
                         </div>
                     </div>
                     <div class="item">
                         <img src="03.jpg" alt="Biblioteca GDias - Imagem 3" style="width:100%;">
                         <div class="carousel-caption">
-                            <h3>iema pleno</h3>
+                            <h3>IEMA Pleno</h3>
                             <p>Gonçalves Dias</p>
                         </div>
                     </div>
@@ -444,63 +445,35 @@
             </div>
         </section>
 
-        <section id="about-section" class="container">
-            <h2 class="section-title text-center">Sobre Nossa Biblioteca</h2>
-            <div class="info-cards-container">
-                <article class="info-card animate__animated animate__zoomInLeft">
-                    <div class="card-header">
-                        <span>Informações</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Biblioteca G. Dias</h3>
-                        <p class="card-desc">A biblioteca fica aberta no período das **7:35 AM até as 17:00 PM**. Entretanto, você pode verificar detalhes de horários específicos.</p>
-                        <p class="card-desc">A Biblioteca Gonçalves Dias possui **computadores para pesquisa** disponíveis para os alunos.</p>
-                        <p class="card-desc">Para **doação de livros**, o material precisa estar em bom estado e sem rasuras.</p>
-                    </div>
-                </article>
-
-                <article class="info-card animate__animated animate__zoomInRight">
-                    <div class="card-header">
-                        <span>Curiosidades</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Sabia dessas?</h3>
-                        <p class="card-desc">A biblioteca foi inaugurada em **2020** quando o prédio Gonçalves Dias se tornou IEMA.</p>
-                        <p class="card-desc">Além de livros, a biblioteca também possui **revistas** e um **espaço confortável para leitura**.</p>
-                        <p class="card-desc">Caso não termine a leitura no tempo de empréstimo, você pode fazer a **renovação**.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
 
         <section id="services-section">
             <h2 class="section-title text-center">Serviços</h2>
             <div class="services-grid container">
-                <div class="service-item animate__animated animate__flipInX">
+                <div class="service-item animate__animated animate__pulse animate__delay-1s">
                     <a href="suporte.html" title="Ficou com dúvida?">
                         <img src="suporte-tecnico.png" alt="Ícone de Suporte" class="service-icon">
                         <h3 class="service-name">Suporte</h3>
                     </a>
                 </div>
-                <div class="service-item animate__animated animate__flipInX">
+                <div class="service-item animate__animated animate__pulse animate__delay-2s">
                     <a href="ideia.html" title="Possui alguma ideia interessante?">
                         <img src="ideia.png" alt="Ícone de Ideias" class="service-icon">
                         <h3 class="service-name">Ideias</h3>
                     </a>
                 </div>
-                <div class="service-item animate__animated animate__flipInX">
+                <div class="service-item animate__animated animate__pulse animate__delay-3s">
                     <a href="calendario.html" title="Confira nosso calendário escolar">
                         <img src="calendario.png" alt="Ícone de Calendário" class="service-icon">
                         <h3 class="service-name">Calendário</h3>
                     </a>
                 </div>
-                <div class="service-item animate__animated animate__flipInX">
+                <div class="service-item animate__animated animate__pulse animate__delay-4s">
                     <a href="horarios.html" title="Confira nosso horário">
                         <img src="relogio.png" alt="Ícone de Horários" class="service-icon">
                         <h3 class="service-name">Horários</h3>
                     </a>
                 </div>
-                <div class="service-item animate__animated animate__flipInX">
+                <div class="service-item animate__animated animate__pulse animate__delay-5s">
                     <a href="documentação.html" title="Veja a nossa documentação">
                         <img src="documento.png" alt="Ícone de Documentação" class="service-icon">
                         <h3 class="service-name">Documentação</h3>
@@ -515,7 +488,6 @@
             <div class="footer-logo">
                 <img src="novalogo.png" alt="Biblioteca GDias Logo" width="200px">
             </div>
-            <p class="footer-copyright">&copy UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2022<br>Todos os Direitos Reservados.</p>
             <ul class="social-links">
                 <li><a href="#"><img src="facebook.png" alt="Facebook" class="social-icon"></a></li>
                 <li><a href="https://www.instagram.com/iema_gdias/"><img src="instagram.png" alt="Instagram"
@@ -523,6 +495,8 @@
                 <li><a href="#"><img src="whatsapp.png" alt="WhatsApp" class="social-icon"></a></li>
                 <li><a href="#"><img src="gmail.png" alt="E-mail" class="social-icon"></a></li>
             </ul>
+            <p class="footer-copyright">&copy UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2022<br>Todos os Direitos
+                Reservados.</p>
         </div>
     </footer>
 
