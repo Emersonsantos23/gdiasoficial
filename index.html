@@ -64,12 +64,15 @@
         color: var(--primary);
     }
 
-    /* Carrossel */
+    /* Carrossel centralizado */
     #carousel{
-        margin-top:100px;
-        width:100%;
+        margin:120px auto 50px auto;
+        width:90%;
+        max-width:1200px;
         position:relative;
         overflow:hidden;
+        border-radius:25px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.5);
     }
     .carousel-slide{
         display:flex;
@@ -79,12 +82,11 @@
         width:100%;
         height:500px;
         object-fit:cover;
-        border-radius:15px;
-        box-shadow: 0 0 30px rgba(255,255,0,0.3);
+        border-radius:25px;
         transition: transform 0.5s, box-shadow 0.5s;
     }
     .carousel-slide img:hover{
-        transform: scale(1.05);
+        transform: scale(1.03);
         box-shadow: 0 0 50px var(--highlight);
     }
     .carousel-btn{
@@ -186,7 +188,7 @@
 <body>
 
 <header>
-    <a href="#"><img src="novalogo.png" alt="Logo"></a>
+    <a href="#"><img src="https://img.icons8.com/ios-filled/100/ffffff/library.png" alt="Logo"></a>
     <nav id="nav">
         <button id="btn-mobile"><span></span></button>
         <ul>
@@ -203,9 +205,9 @@
     <div id="carousel">
         <button class="carousel-btn prev">&#10094;</button>
         <div class="carousel-slide">
-            <img src="01.jpg" alt="Imagem 1">
-            <img src="02.jpg" alt="Imagem 2">
-            <img src="03.jpg" alt="Imagem 3">
+            <img src="https://picsum.photos/id/1015/1920/1080" alt="Imagem 1">
+            <img src="https://picsum.photos/id/1016/1920/1080" alt="Imagem 2">
+            <img src="https://picsum.photos/id/1018/1920/1080" alt="Imagem 3">
         </div>
         <button class="carousel-btn next">&#10095;</button>
     </div>
@@ -239,7 +241,7 @@
 </main>
 
 <footer>
-    <img src="novalogo.png" alt="Logo">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/library.png" alt="Logo">
     <ul>
         <li><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></li>
         <li><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></li>
