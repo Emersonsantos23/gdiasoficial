@@ -4,26 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Biblioteca GDias</title>
-<link rel="icon" href="icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-    /* --- Variáveis --- */
     :root{
-        --primary: #0d6efd;
-        --secondary: #6610f2;
-        --highlight: #ffc107;
+        --primary: #1e1e2f;
+        --secondary: #4b2a99;
+        --highlight: #ffcc00;
         --text-light: #ffffff;
-        --bg-light: #f5f5f5;
-        --shadow: 0 10px 30px rgba(0,0,0,0.15);
+        --bg-light: #2a2a3d;
+        --shadow: 0 10px 30px rgba(0,0,0,0.5);
         --font-title: 'Montserrat', sans-serif;
         --font-body: 'Poppins', sans-serif;
     }
 
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family: var(--font-body); background:#fff; color:#212529; scroll-behavior: smooth;}
+    body{font-family: var(--font-body); background: var(--primary); color:#fff; scroll-behavior: smooth;}
     a{text-decoration:none;color:inherit;}
 
-    /* --- Header --- */
+    /* Header */
     header{
         position: fixed;
         top:0; left:0;
@@ -32,7 +30,7 @@
         justify-content:space-between;
         align-items:center;
         padding:15px 5%;
-        background: rgba(13,110,253,0.8);
+        background: rgba(30,30,47,0.95);
         backdrop-filter: blur(10px);
         z-index:1000;
         box-shadow: var(--shadow);
@@ -40,68 +38,60 @@
         border-bottom-right-radius: 10px;
         transition: 0.3s;
     }
-
-    header img{height:55px; filter: brightness(0) invert(1);}
+    header img{height:55px;}
 
     nav ul{
         display:flex; gap:25px; list-style:none;
     }
-
     nav ul li a{
         padding:8px 15px;
         border-radius:30px;
         font-weight:600;
         transition:0.3s;
+        color:#fff;
     }
-
     nav ul li a:hover{
         background: var(--highlight);
         color: var(--primary);
     }
-
     nav ul li a.entrar{
-        background: var(--text-light);
+        background: var(--highlight);
         color: var(--primary);
         font-weight:700;
     }
-
     nav ul li a.entrar:hover{
-        background: var(--highlight);
+        background: #fff;
         color: var(--primary);
     }
 
-    /* --- Carrossel Moderno --- */
+    /* Carrossel */
     #carousel{
         margin-top:100px;
         width:100%;
         position:relative;
         overflow:hidden;
     }
-
     .carousel-slide{
         display:flex;
         transition: transform 0.7s ease-in-out;
     }
-
     .carousel-slide img{
         width:100%;
         height:500px;
         object-fit:cover;
         border-radius:15px;
-        box-shadow: var(--shadow);
-        transition: transform 0.5s;
+        box-shadow: 0 0 30px rgba(255,255,0,0.3);
+        transition: transform 0.5s, box-shadow 0.5s;
     }
-
     .carousel-slide img:hover{
         transform: scale(1.05);
+        box-shadow: 0 0 50px var(--highlight);
     }
-
-    /* --- Carousel controls --- */
     .carousel-btn{
         position:absolute;
         top:50%;
         transform:translateY(-50%);
-        background: rgba(0,0,0,0.4);
+        background: rgba(0,0,0,0.6);
         color:#fff;
         border:none;
         font-size:2em;
@@ -111,71 +101,56 @@
         transition:0.3s;
         z-index:10;
     }
-
     .carousel-btn:hover{background: var(--highlight); color:var(--primary);}
     .prev{left:20px;}
     .next{right:20px;}
 
-    /* --- Serviços --- */
+    /* Serviços */
     #services{
         background: var(--bg-light);
         padding:80px 5%;
         text-align:center;
+        border-radius:20px 20px 0 0;
     }
-
     .services-grid{
         display:flex;
         flex-wrap:wrap;
         justify-content:center;
         gap:40px;
     }
-
     .service-item{
-        background:#fff;
+        background: #1f1f34;
         width:180px;
         border-radius:15px;
-        box-shadow: var(--shadow);
+        box-shadow: 0 0 20px rgba(255,204,0,0.3);
         transition: 0.3s;
         padding:20px;
         cursor:pointer;
     }
-
     .service-item img{
         width:90px;
         height:90px;
         margin-bottom:15px;
         transition: 0.3s;
     }
-
     .service-item h3{
         font-family: var(--font-title);
         font-size:1.1em;
-        color: var(--primary);
+        color: var(--highlight);
     }
-
     .service-item:hover{
-        transform: translateY(-10px) scale(1.02);
-        box-shadow:0 15px 40px rgba(0,0,0,0.25);
+        transform: translateY(-10px) scale(1.05);
+        box-shadow:0 0 40px var(--highlight);
     }
 
-    .service-item:hover img{
-        transform: scale(1.1);
-    }
-
-    /* --- Footer --- */
+    /* Footer */
     footer{
-        background: var(--primary);
+        background: #121223;
         color:#fff;
         text-align:center;
         padding:60px 5%;
     }
-
-    footer img{
-        height:55px;
-        filter: brightness(0) invert(1);
-        margin-bottom:20px;
-    }
-
+    footer img{height:55px; margin-bottom:20px;}
     footer ul{
         display:flex;
         justify-content:center;
@@ -183,23 +158,21 @@
         list-style:none;
         margin-bottom:20px;
     }
-
     footer ul li img{
         width:40px; height:40px;
         border-radius:50%;
         padding:8px;
-        background: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.1);
         transition:0.3s;
     }
-
     footer ul li img:hover{
         transform:scale(1.2);
         background: var(--highlight);
     }
 
-    /* --- Responsivo --- */
+    /* Responsivo */
     @media(max-width:768px){
-        nav ul{flex-direction:column; background:rgba(255,255,255,0.9); position:absolute; top:70px; right:5%; padding:15px; border-radius:10px; display:none;}
+        nav ul{flex-direction:column; background:rgba(30,30,47,0.95); position:absolute; top:70px; right:5%; padding:15px; border-radius:10px; display:none;}
         nav.active ul{display:flex;}
         #btn-mobile{display:block; background:none; border:none; cursor:pointer; width:30px; height:30px; position:relative;}
         #btn-mobile span, #btn-mobile span::before, #btn-mobile span::after{
@@ -208,13 +181,12 @@
         #btn-mobile span::before{content:''; top:-10px;}
         #btn-mobile span::after{content:''; top:10px;}
     }
-
 </style>
 </head>
 <body>
 
 <header>
-    <a href="#"><img src="novalogo.png" alt="Logo"></a>
+    <a href="#"><img src="https://img.icons8.com/ios-filled/100/ffffff/book.png" alt="Logo"></a>
     <nav id="nav">
         <button id="btn-mobile"><span></span></button>
         <ul>
@@ -231,9 +203,9 @@
     <div id="carousel">
         <button class="carousel-btn prev">&#10094;</button>
         <div class="carousel-slide">
-            <img src="01.jpeg" alt="Imagem 1">
-            <img src="02.jpeg" alt="Imagem 2">
-            <img src="03.jpeg" alt="Imagem 3">
+            <img src="01.jpg" alt="Imagem 1">
+            <img src="02.jpg" alt="Imagem 2">
+            <img src="03.jpg" alt="Imagem 3">
         </div>
         <button class="carousel-btn next">&#10095;</button>
     </div>
@@ -243,23 +215,23 @@
         <h2 style="font-family:var(--font-title); margin-bottom:50px;">Serviços</h2>
         <div class="services-grid">
             <div class="service-item">
-                <img src="suporte-tecnico.png" alt="Suporte">
+                <img src="https://img.icons8.com/ios-filled/100/ffcc00/technical-support.png" alt="Suporte">
                 <h3>Suporte</h3>
             </div>
             <div class="service-item">
-                <img src="ideia.png" alt="Ideias">
+                <img src="https://img.icons8.com/ios-filled/100/ffcc00/idea.png" alt="Ideias">
                 <h3>Ideias</h3>
             </div>
             <div class="service-item">
-                <img src="calendario.png" alt="Calendário">
+                <img src="https://img.icons8.com/ios-filled/100/ffcc00/calendar.png" alt="Calendário">
                 <h3>Calendário</h3>
             </div>
             <div class="service-item">
-                <img src="relogio.png" alt="Horários">
+                <img src="https://img.icons8.com/ios-filled/100/ffcc00/clock.png" alt="Horários">
                 <h3>Horários</h3>
             </div>
             <div class="service-item">
-                <img src="documento.png" alt="Documentação">
+                <img src="https://img.icons8.com/ios-filled/100/ffcc00/document.png" alt="Documentação">
                 <h3>Documentação</h3>
             </div>
         </div>
@@ -267,14 +239,14 @@
 </main>
 
 <footer>
-    <img src="novalogo.png" alt="Logo">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/book.png" alt="Logo">
     <ul>
-        <li><img src="facebook.png" alt="Facebook"></li>
-        <li><img src="instagram.png" alt="Instagram"></li>
-        <li><img src="whatsapp.png" alt="WhatsApp"></li>
-        <li><img src="gmail.png" alt="Email"></li>
+        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></li>
+        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram"></li>
+        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp"></li>
+        <li><img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email"></li>
     </ul>
-    <p>&copy; UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2022. Todos os direitos reservados.</p>
+    <p>&copy; UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2025. Todos os direitos reservados.</p>
 </footer>
 
 <script>
@@ -282,11 +254,9 @@
     const nav = document.getElementById('nav');
     btnMobile.addEventListener('click', ()=>nav.classList.toggle('active'));
 
-    // Carrossel simples
     const slide = document.querySelector('.carousel-slide');
     const slides = document.querySelectorAll('.carousel-slide img');
     let index = 0;
-
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
 
@@ -299,7 +269,6 @@
 
     nextBtn.addEventListener('click', ()=>showSlide(index+1));
     prevBtn.addEventListener('click', ()=>showSlide(index-1));
-
     setInterval(()=>showSlide(index+1), 5000);
 </script>
 
