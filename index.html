@@ -8,13 +8,14 @@
     <link rel="icon" href="icon.png">
     <title>Biblioteca GDias</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
-        /* CSS APRIMORADO COM FOCO NO CARROSSEL E ÍCONES */
+        /* CSS APRIMORADO COM HEADER ESCURO E FOCO NO CARROSSEL */
 
         /* --- Variáveis e Tipografia --- */
         :root {
@@ -40,18 +41,16 @@
             background-color: white;
             margin: 0;
             padding-top: 80px;
-            /* Espaço para o header fixo */
         }
 
-        /* --- Header e Navegação --- */
+        /* --- Header e Navegação (Cor Alterada para Fundo Escuro) --- */
         #main-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 5%;
-            background-color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            /* Sombra mais fina */
+            background-color: var(--primary-color); /* Fundo azul escuro para destacar logo branca */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             position: fixed;
             top: 0;
             left: 0;
@@ -62,6 +61,7 @@
         #logo-link img {
             height: 60px;
             width: auto;
+            /* Se a logo for branca, ela já se destacará */
         }
 
         #menu {
@@ -74,9 +74,8 @@
 
         #menu a {
             text-decoration: none;
-            color: var(--text-color);
+            color: white; /* Cor branca para o texto do menu no header escuro */
             font-weight: 600;
-            /* Poppins Semi-bold */
             padding: 5px 0;
             position: relative;
             transition: color 0.3s;
@@ -91,13 +90,13 @@
             transform: translateX(-50%);
             width: 0;
             height: 3px;
-            background-color: var(--secondary-color);
+            background-color: white;
             transition: width 0.3s;
         }
 
         #menu a:hover,
         #menu a.entrar {
-            color: var(--secondary-color);
+            color: var(--highlight-color); /* Amarelo no hover */
         }
 
         #menu a:hover::after,
@@ -107,8 +106,8 @@
         }
 
         #menu a.entrar {
-            color: white;
-            background-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: white; /* Botão entrar branco no fundo azul */
             padding: 8px 15px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -116,7 +115,7 @@
         }
 
         #menu a.entrar:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--highlight-color);
         }
 
         #menu a.entrar::after {
@@ -161,6 +160,24 @@
             box-shadow: var(--card-shadow);
         }
 
+        /* Estilo para o ícone no slide (se for um <img>) */
+        .carousel-icon-slide {
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-light); /* Fundo claro para o slide do ícone */
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .carousel-icon-slide img {
+            width: 150px; /* Tamanho maior para destaque do ícone */
+            height: 150px;
+            box-shadow: none; /* Remove sombra do ícone */
+            border-radius: 0;
+        }
+
         .carousel-caption h3 {
             font-family: var(--title-font);
             font-weight: 700;
@@ -169,7 +186,8 @@
 
         /* --- Seção de Serviços/Ícones --- */
         #services-section {
-            background-color: var(--background-light); /* Fundo sutil para esta seção */
+            background-color: var(--background-light);
+            /* Fundo sutil para esta seção */
             padding: 60px 0 80px 0;
             text-align: center;
         }
@@ -186,7 +204,6 @@
         .service-item {
             width: 150px;
             transition: transform 0.3s, opacity 0.3s;
-            /* Mantendo transição de hover */
         }
 
         .service-item a {
@@ -197,7 +214,7 @@
 
         .service-icon {
             width: 90px;
-            height: 90px; /* Definindo altura fixa para manter o círculo */
+            height: 90px;
             padding: 15px;
             background-color: white;
             border-radius: 50%;
@@ -205,7 +222,7 @@
             margin-bottom: 10px;
             transition: background-color 0.3s, transform 0.3s;
         }
-        
+
         /* Efeito de destaque no hover */
         .service-item:hover {
             transform: translateY(-5px);
@@ -241,7 +258,6 @@
 
         .footer-logo img {
             filter: brightness(1.5);
-            /* Deixa o logo mais claro no fundo escuro */
             margin-bottom: 10px;
         }
 
@@ -275,9 +291,8 @@
             transform: scale(1.1);
         }
 
-        /* --- Responsividade (Media Queries) --- */
+        /* --- Responsividade --- */
         @media (max-width: 768px) {
-
             /* Menu Mobile */
             #btn-mobile {
                 display: block;
@@ -309,27 +324,19 @@
                 animation: slideDown 0.3s ease-out;
             }
 
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            /* Hamburger Icon */
+            #hamburger {
+                background: white; /* Hamburger branco no fundo azul */
+            }
+            #hamburger::before,
+            #hamburger::after {
+                background: white;
             }
 
-            #menu a {
-                padding: 10px 0;
-                width: 100%;
-            }
         }
-
-        /* Hambuger Icon (Mantido) */
+        /* Mantendo estilos de hamburger e animações */
         #btn-mobile {
-            /* ... estilos do hamburger ... */
+            display: none;
             border: none;
             background: none;
             cursor: pointer;
@@ -337,45 +344,6 @@
             position: relative;
             width: 30px;
             height: 30px;
-        }
-
-        #hamburger {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background: var(--text-color);
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        #hamburger::before,
-        #hamburger::after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 3px;
-            background: var(--text-color);
-            transition: transform 0.3s;
-        }
-
-        #hamburger::before {
-            top: 8px;
-        }
-
-        #hamburger::after {
-            bottom: 8px;
-        }
-
-        /* Animação do Menu Aberto */
-        #nav.active #hamburger {
-            transform: rotate(45deg);
-        }
-
-        #nav.active #hamburger::before {
-            opacity: 0;
-        }
-
-        #nav.active #hamburger::after {
-            transform: rotate(-90deg) translate(0, 10px);
         }
     </style>
 </head>
@@ -408,7 +376,7 @@
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
+                    <li data-target="#myCarousel" data-slide-to="3"></li> </ol>
 
                 <div class="carousel-inner">
                     <div class="item active">
@@ -430,6 +398,15 @@
                         <div class="carousel-caption">
                             <h3>IEMA Pleno</h3>
                             <p>Gonçalves Dias</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-icon-slide">
+                            <img src="relogio.png" alt="Ícone de Relógio" class="animate__animated animate__swing animate__infinite">
+                        </div>
+                        <div class="carousel-caption" style="color: black; text-shadow: 1px 1px white;">
+                            <h3>Sites de Consulta de Horário</h3>
+                            <p>Verifique nossos Horários na seção abaixo!</p>
                         </div>
                     </div>
                 </div>
@@ -505,6 +482,11 @@
 
     <script>
         const btnMobile = document.getElementById('btn-mobile');
+        
+        // Define o estilo do hamburger para branco assim que o script carregar
+        document.getElementById('hamburger').style.backgroundColor = 'white';
+        document.getElementById('hamburger').style.setProperty('--text-color', 'white');
+
 
         function toggleMenu(event) {
             if (event.type === 'touchstart') event.preventDefault();
