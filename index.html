@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icon.png">
+    <title>Biblioteca GDias</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        /* style.css EMBUTIDO */
+
+        /* --- Reset e Tipografia Básica --- */
+        :root {
+            --primary-color: #007bff;
+            /* Azul primário (pode ajustar) */
+            --secondary-color: #6c757d;
+            /* Cinza secundário */
+            --background-light: #f8f9fa;
+            /* Fundo claro */
+            --text-color: #343a40;
+            /* Cor do texto */
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: var(--text-color);
+            background-color: white;
+            margin: 0;
+            padding-top: 80px;
+            /* Espaço para o header fixo */
+        }
+
+        /* --- Header e Navegação --- */
+        #main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        #logo-link img {
+            height: 60px;
+            /* Ajuste o tamanho do logo */
+            width: auto;
+        }
+
+        #menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #menu a:hover,
+        #menu a.entrar {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* --- Menu Mobile (Hamburger) --- */
+        #btn-mobile {
+            display: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        #hamburger {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: var(--text-color);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        #hamburger::before,
+        #hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: var(--text-color);
+            transition: transform 0.3s;
+        }
+
+        #hamburger::before {
+            top: 8px;
+        }
+
+        #hamburger::after {
+            bottom: 8px;
+        }
+
+        /* Animação do Menu Aberto */
+        #nav.active #hamburger {
+            transform: rotate(45deg);
+        }
+
+        #nav.active #hamburger::before {
+            opacity: 0;
+        }
+
+        #nav.active #hamburger::after {
+            transform: rotate(-90deg) translate(0, 10px);
+        }
+
+        /* --- Títulos de Seção --- */
+        .section-title {
+            margin: 40px 0 20px 0;
+            font-size: 2.5em;
+            font-weight: 300;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* --- Carousel (Galeria) --- */
+        #gallery-section {
+            padding: 20px 0;
+        }
+
+        .carousel-inner img {
+            max-height: 450px;
+            /* Limita a altura das imagens no desktop */
+            object-fit: cover;
+        }
+
+        /* --- Seção Sobre (Cards de Informação) --- */
+        #about-section {
+            padding: 40px 0;
+        }
+
+        .info-cards-container {
+            display: flex;
+            justify-content: center;
+            /* Centraliza os cards */
+            gap: 30px;
+            margin-top: 30px;
+            padding: 0 15px;
+        }
+
+        .info-card {
+            background: var(--background-light);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            flex: 1;
+            max-width: 45%;
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header span {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .card-desc {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* --- Seção de Serviços --- */
+        #services-section {
+            background-color: var(--background-light);
+            padding: 40px 0 60px 0;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Permite quebrar linha em telas menores */
+            gap: 30px;
+            margin-top: 30px;
+            padding: 0 15px;
+        }
+
+        .service-item {
+            width: 150px;
+            /* Tamanho fixo para o item de serviço */
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+
+        .service-item:hover {
+            transform: scale(1.05);
+        }
+
+        .service-item a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .service-icon {
+            width: 80px;
+            /* Reduzindo o tamanho dos ícones */
+            height: auto;
+            margin-bottom: 10px;
+            transition: filter 0.3s;
+        }
+
+        .service-item:hover .service-icon {
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .service-name {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        /* --- Footer --- */
+        #main-footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 30px 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            line-height: 1.5;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover .social-icon {
+            transform: scale(1.1);
+        }
+
+        /* --- Responsividade (Media Queries) --- */
+        @media (max-width: 992px) {
+            .info-cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .info-card {
+                max-width: 80%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Menu Mobile */
+            #btn-mobile {
+                display: block;
+            }
+
+            #nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            #menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 5%;
+                background-color: white;
+                padding: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+                z-index: 999;
+                width: 150px;
+                text-align: right;
+            }
+
+            #nav.active #menu {
+                display: flex;
+                animation: slideDown 0.3s ease-out;
+                /* Animação simples ao abrir */
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            #menu a {
+                padding: 10px 0;
+                width: 100%;
+            }
+
+            .info-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #main-header {
+                padding: 10px 20px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .services-grid {
+                gap: 20px;
+            }
+
+            .service-item {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="main-header">
+        <a id="logo-link" href="login.html">
+            <img src="novalogo.png" alt="Biblioteca GDias Logo" width="200px">
+        </a>
+        <nav id="nav">
+            <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu"
+                aria-expanded="false">
+                <span id="hamburger"></span>
+            </button>
+            <ul id="menu" role="menu">
+                <li><a class="nav-link entrar" href="login.html">Entrar</a></li>
+                <li><a class="nav-link" href="projetos.html">Projetos</a></li>
+                <li><a class="nav-link" href="sobre.html">Sobre</a></li>
+                <li><a class="nav-link" href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="gallery-section" class="container animate__animated animate__fadeIn">
+            <h1 class="section-title text-center">Galeria</h1>
+            <br>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="01.jpg" alt="Biblioteca GDias - Imagem 1" style="width:100%;">
+                        <div class="carousel-caption">
+                            <h3>iema pleno</h3>
+                            <p>Gonçalves Dias</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="02.jpg" alt="Biblioteca GDias - Imagem 2" style="width:100%;">
+                        <div class="carousel-caption">
+                            <h3>iema pleno</h3>
+                            <p>Gonçalves Dias</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="03.jpg" alt="Biblioteca GDias - Imagem 3" style="width:100%;">
+                        <div class="carousel-caption">
+                            <h3>iema pleno</h3>
+                            <p>Gonçalves Dias</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="about-section" class="container">
+            <h2 class="section-title text-center">Sobre Nossa Biblioteca</h2>
+            <div class="info-cards-container">
+                <article class="info-card animate__animated animate__zoomInLeft">
+                    <div class="card-header">
+                        <span>Informações</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Biblioteca G. Dias</h3>
+                        <p class="card-desc">A biblioteca fica aberta no período das **7:35 AM até as 17:00 PM**. Entretanto, você pode verificar detalhes de horários específicos.</p>
+                        <p class="card-desc">A Biblioteca Gonçalves Dias possui **computadores para pesquisa** disponíveis para os alunos.</p>
+                        <p class="card-desc">Para **doação de livros**, o material precisa estar em bom estado e sem rasuras.</p>
+                    </div>
+                </article>
+
+                <article class="info-card animate__animated animate__zoomInRight">
+                    <div class="card-header">
+                        <span>Curiosidades</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sabia dessas?</h3>
+                        <p class="card-desc">A biblioteca foi inaugurada em **2020** quando o prédio Gonçalves Dias se tornou IEMA.</p>
+                        <p class="card-desc">Além de livros, a biblioteca também possui **revistas** e um **espaço confortável para leitura**.</p>
+                        <p class="card-desc">Caso não termine a leitura no tempo de empréstimo, você pode fazer a **renovação**.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="services-section">
+            <h2 class="section-title text-center">Serviços</h2>
+            <div class="services-grid container">
+                <div class="service-item animate__animated animate__flipInX">
+                    <a href="suporte.html" title="Ficou com dúvida?">
+                        <img src="suporte-tecnico.png" alt="Ícone de Suporte" class="service-icon">
+                        <h3 class="service-name">Suporte</h3>
+                    </a>
+                </div>
+                <div class="service-item animate__animated animate__flipInX">
+                    <a href="ideia.html" title="Possui alguma ideia interessante?">
+                        <img src="ideia.png" alt="Ícone de Ideias" class="service-icon">
+                        <h3 class="service-name">Ideias</h3>
+                    </a>
+                </div>
+                <div class="service-item animate__animated animate__flipInX">
+                    <a href="calendario.html" title="Confira nosso calendário escolar">
+                        <img src="calendario.png" alt="Ícone de Calendário" class="service-icon">
+                        <h3 class="service-name">Calendário</h3>
+                    </a>
+                </div>
+                <div class="service-item animate__animated animate__flipInX">
+                    <a href="horarios.html" title="Confira nosso horário">
+                        <img src="relogio.png" alt="Ícone de Horários" class="service-icon">
+                        <h3 class="service-name">Horários</h3>
+                    </a>
+                </div>
+                <div class="service-item animate__animated animate__flipInX">
+                    <a href="documentação.html" title="Veja a nossa documentação">
+                        <img src="documento.png" alt="Ícone de Documentação" class="service-icon">
+                        <h3 class="service-name">Documentação</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="novalogo.png" alt="Biblioteca GDias Logo" width="200px">
+            </div>
+            <p class="footer-copyright">&copy UNIDADE PLENA SÃO LUIS GONÇALVES DIAS 2022<br>Todos os Direitos Reservados.</p>
+            <ul class="social-links">
+                <li><a href="#"><img src="facebook.png" alt="Facebook" class="social-icon"></a></li>
+                <li><a href="https://www.instagram.com/iema_gdias/"><img src="instagram.png" alt="Instagram"
+                            class="social-icon"></a></li>
+                <li><a href="#"><img src="whatsapp.png" alt="WhatsApp" class="social-icon"></a></li>
+                <li><a href="#"><img src="gmail.png" alt="E-mail" class="social-icon"></a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        const btnMobile = document.getElementById('btn-mobile');
+
+        function toggleMenu(event) {
+            if (event.type === 'touchstart') event.preventDefault();
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('active');
+            const active = nav.classList.contains('active');
+            event.currentTarget.setAttribute('aria-expanded', active);
+            if (active) {
+                event.currentTarget.setAttribute('aria-label', 'Fechar Menu');
+            } else {
+                event.currentTarget.setAttribute('aria-label', 'Abrir Menu');
+            }
+        }
+
+        btnMobile.addEventListener('click', toggleMenu);
+        btnMobile.addEventListener('touchstart', toggleMenu);
+    </script>
+</body>
+
+</html>
